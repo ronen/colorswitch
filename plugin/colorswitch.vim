@@ -33,8 +33,8 @@ function! s:ApplyTheme()
   endif
 endfunction
 
-" Apply theme at startup
-call s:ApplyTheme()
+" Delay theme application until after user config is loaded
+autocmd VimEnter * call s:ApplyTheme()
 
 " React to macOS appearance change
 augroup ColorSwitchAppearance
