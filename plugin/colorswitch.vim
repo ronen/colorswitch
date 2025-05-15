@@ -16,6 +16,7 @@ endfunction
 
 function! s:ApplyTheme()
   if !exists('g:colorswitch_light') || !exists('g:colorswitch_dark')
+    echom "[colorswitch] Please set g:colorswitch_light and g:colorswitch_dark in your .gvimrc"
     return
   endif
   if s:IsDarkMode()
@@ -37,5 +38,5 @@ autocmd VimEnter * call s:ApplyTheme()
 " React to macOS appearance change
 augroup ColorSwitchAppearance
   autocmd!
-  autocmd OSAppearanceChanged * call s:ApplyTheme()
+  autocmd OSAppearanceChanged * call timer_start(300, {-> s:ApplyTheme()})
 augroup END
