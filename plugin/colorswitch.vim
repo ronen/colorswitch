@@ -7,11 +7,6 @@ if !has('gui_running') || !has('autocmd') || !has('timers')
   finish
 endif
 
-if !exists('g:colorswitch_light') || !exists('g:colorswitch_dark')
-  echom "[colorswitch] Please set g:colorswitch_light and g:colorswitch_dark in your .gvimrc"
-  finish
-endif
-
 let s:current_theme = ''
 
 function! s:IsDarkMode()
@@ -20,6 +15,9 @@ function! s:IsDarkMode()
 endfunction
 
 function! s:ApplyTheme()
+  if !exists('g:colorswitch_light') || !exists('g:colorswitch_dark')
+    return
+  endif
   if s:IsDarkMode()
     let l:new_theme = g:colorswitch_dark
   else
